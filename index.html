@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Masterclass: Openings, Middlegames & Endgames</title>
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --primary: #81b64c;
+            --primary-hover: #a3d46a;
+            --text-main: #ffffff;
+            --text-muted: #b0b0b0;
+            --border: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background-color: var(--bg-card);
+            text-align: center;
+            padding: 2rem 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        header h1 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            background-color: #1a1a1a;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav button {
+            background: transparent;
+            border: 2px solid transparent;
+            color: var(--text-muted);
+            padding: 0.6rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav button:hover {
+            color: var(--text-main);
+            border-color: var(--border);
+        }
+
+        nav button.active {
+            background-color: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 0.5rem 0;
+            color: var(--primary);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .principles-list {
+            list-style: none;
+        }
+
+        .principles-list li {
+            position: relative;
+            padding-left: 1.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .principles-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .opening-box {
+            background: #252525;
+            padding: 1rem;
+            border-left: 4px solid var(--primary);
+            border-radius: 0 4px 4px 0;
+            margin-bottom: 1rem;
+        }
+
+        .moves {
+            font-family: monospace;
+            background: #111;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: #e6c229;
+            display: inline-block;
+            margin-top: 0.4rem;
+        }
+
+        .tactic-box {
+            border-left: 4px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Chess Academy</h1>
+        <p>Master the three critical stages of the royal game</p>
+    </header>
+
+    <nav>
+        <button class="nav-btn active" onclick="switchTab('opening')">1. Opening</button>
+        <button class="nav-btn" onclick="switchTab('middlegame')">2. Middlegame</button>
+        <button class="nav-btn" onclick="switchTab('endgame')">3. Endgame</button>
+    </nav>
+
+    <div class="container">
+
+        <!-- SECTION 1: OPENING -->
+        <div id="opening" class="tab-content active">
+            <h2>The Opening Stage</h2>
+            
+            <div class="card">
+                <h3>Core Opening Principles</h3>
+                <p style="margin-bottom: 1rem;">The main goal of the opening is to get your army out safely and stake a claim in the center of the board. Keep these rules memorized:</p>
+                <ul class="principles-list">
+                    <li><strong>Move a central pawn first:</strong> Push your e-pawn or d-pawn to open lines for your bishops and control the critical central squares.</li>
+                    <li><strong>Develop pieces quickly:</strong> Bring your Knights and Bishops out to active squares. Don't waste time moving the same piece twice or bringing out your Queen too early.</li>
+                    <li><strong>Castle before move 10:</strong> Get your King to safety behind a wall of pawns and activate your Rook toward the center before launching an attack.</li>
+                </ul>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>White Openings</h3>
+                    
+                    <div class="opening-box">
+                        <h4>The Ruy Lopez</h4>
+                        <p>One of the oldest and most deeply analyzed openings in chess, emphasizing rapid development and long-term structural pressure.</p>
+                        <span class="moves">1. e4 e5 2. Nf3 Nc6 3. Bb5</span>
+                    </div>
+
+                    <div class="opening-box">
+                        <h4>The Italian Game</h4>
+                        <p>Focuses on controlling the center immediately and targeting Black's weak f7 square with the light-squared bishop.</p>
+                        <span class="moves">1. e4 e5 2. Nf3 Nc6 3. Bc4</span>
+                    </div>
+
+                    <div class="opening-box">
+                        <h4>The Queen's Gambit</h4>
+                        <p>White offers a flank pawn to trade for a central black pawn, looking to secure full ownership of the center squares.</p>
+                        <span class="moves">1. d4 d5 2. c4</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Black Openings</h3>
+                    
+                    <div class="opening-box">
+                        <h4>The Sicilian Defense</h4>
+                        <p>An aggressive, asymmetrical response to 1.e4. Black fights for the center using a flank pawn, leading to sharp, tactical games.</p>
+                        <span class="moves">1. e4 c5</span>
+                    </div>
+
+                    <div class="opening-box">
+                        <h4>The French Defense</h4>
+                        <p>A solid, counter-attacking opening. Black accepts a temporarily cramped position in exchange for a rock-solid pawn chain.</p>
+                        <span class="moves">1. e4 e6</span>
+                    </div>
+
+                    <div class="opening-box">
+                        <h4>The Caro-Kann Defense</h4>
+                        <p>Similar to the French but considered safer, as Black aims to challenge White's e4 pawn without blocking in their light-squared bishop.</p>
+                        <span class="moves">1. e4 c6</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: MIDDLEGAME -->
+        <div id="middlegame" class="tab-content">
+            <h2>The Middlegame Stage</h2>
+            
+            <div class="card">
+                <h3>Tips to Improve Your Middlegame</h3>
+                <p style="margin-bottom: 1rem;">Once the pieces are out, the real strategic battle begins. Use these tips to formulate better plans:</p>
+                <ul class="principles-list">
+                    <li><strong>Look for undefended pieces:</strong> Loose pieces drop fingers! Always scan the board for your opponent's unprotected units.</li>
+                    <li><strong>Control open files with Rooks:</strong> Rooks need open highways. Put them on columns where there are no pawns in their way.</li>
+                    <li><strong>Improve your worst piece:</strong> If you don't know what to do, find your least active piece and maneuver it to a better square.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Essential Tactical Themes</h3>
+                <p style="margin-bottom: 1rem;">Middlegames are heavily decided by short, explosive patterns called tactics. Here are the big three you must watch out for:</p>
+                
+                <div class="opening-box tactic-box">
+                    <h4>1. The Fork</h4>
+                    <p>When a single piece attacks two or more opponent pieces at the exact same time. Knights are notoriously lethal at executing forks.</p>
+                </div>
+
+                <div class="opening-box tactic-box">
+                    <h4>2. The Pin</h4>
+                    <p>When an attacking piece restricts an opponent's piece from moving because doing so would expose a much more valuable target (like the King or Queen) behind it.</p>
+                </div>
+
+                <div class="opening-box tactic-box">
+                    <h4>3. The Skewer</h4>
+                    <p>The reverse of a pin. An attacking piece hits a valuable target (like a King) which is forced to move out of the way, exposing a less valuable piece behind it to be captured.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: ENDGAME -->
+        <div id="endgame" class="tab-content">
+            <h2>The Endgame Stage</h2>
+            
+            <div class="card">
+                <h3>Core Endgame Principles</h3>
+                <p style="margin-bottom: 1rem;">With fewer pieces on the board, the rules change entirely. Keep these principles in mind:</p>
+                <ul class="principles-list">
+                    <li><strong>Activate your King:</strong> In the opening and middlegame, the King is a target. In the endgame, the King is an active, fighting attacker that must march to the center!</li>
+                    <li><strong>Push your passed pawns:</strong> A passed pawn is a pawn with no opposing pawns in front of it or on adjacent files. Push it aggressively to turn it into a Queen.</li>
+                    <li><strong>Zugzwang is real:</strong> A German chess term meaning "compulsion to move." Sometimes, the strongest move you can make is to pass the turn back to your opponent, forcing them to ruin their own position.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Critical Endgame Positions to Know</h3>
+                
+                <div class="opening-box" style="border-left-color: #e74c3c;">
+                    <h4>King and Pawn Endgames (Opposition)</h4>
+                    <p>When two Kings face each other with only one square between them, the player *not* having to move has the "opposition". Knowing how to use opposition determines whether you can guide a pawn safely to promotion or force a draw.</p>
+                </div>
+
+                <div class="opening-box" style="border-left-color: #e74c3c;">
+                    <h4>Rook and Pawn Endgames (Lucena Position)</h4>
+                    <p>The most common major endgame structure. The Lucena position is known as the "bridge building" technique, where a player uses their Rook to shield their King from enemy checks so a passed pawn can step up and promote.</p>
+                </div>
+
+                <div class="opening-box" style="border-left-color: #e74c3c;">
+                    <h4>The Philidor Position</h4>
+                    <p>The ultimate defensive endgame setup for drawing a Rook and Pawn vs Rook match. By cutting off the enemy King along the 3rd or 6th rank, you can secure an absolute draw every time.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Remove active class from buttons
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show current tab
+            document.getElementById(tabId).classList.add('active');
+
+            // Find clicked button and add active class
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
